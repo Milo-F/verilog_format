@@ -17,6 +17,7 @@ public class NetDefineAlign implements StyleImp {
             String line = buffer.get(j);
             LinkedList<String> resp = new LinkedList<String>();
             line = line.trim();
+            line = line.replaceAll("[ ]*,[ ]*", ",");
             StringBuilder line_builder = new StringBuilder("    ");
             if (line.matches("(^reg[ ].*)|(^wire[ ].*)")) {
                 System.out.println(line);
