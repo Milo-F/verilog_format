@@ -13,13 +13,22 @@ public class NetDefineAlign implements StyleImp {
         // int start = 0;
         // int end = 0;
         int location = 0;
+        boolean have_comment = false;
         for (int j = 0; j < buffer.size(); j++) {
             String line = buffer.get(j);
+            String comment="";
             LinkedList<String> resp = new LinkedList<String>();
             line = line.trim();
             line = line.replaceAll("[ ]*,[ ]*", ",");
             StringBuilder line_builder = new StringBuilder("    ");
-            if (line.matches("(^reg[ ].*)|(^wire[ ].*)")) {
+            if (line.matches("(^reg[ \\[].*)|(^wire[ \\[].*)")) {
+                if (line.matches(".*//.*") || line.matches(".*/\\*.*")) {
+                    comment = line.substring(line.indexOf(";")+1, line.length()).trim();
+                    line = line.substring(0, line.indexOf(";")+1);
+                    have_comment = true;
+                } else {
+                    have_comment = false;
+                }
                 System.out.println(line);
                 boolean reg_or_wire = false;
                 if (line.matches("^(reg).*")) {
@@ -44,6 +53,9 @@ public class NetDefineAlign implements StyleImp {
                     line_builder.append(" ");
                 }
                 line_builder.append(line.substring(line.lastIndexOf(" "), line.length()));
+                if (have_comment) {
+                    line_builder.append("    " + comment);
+                }
                 resp.add(line_builder.toString());
                 // start = getIdxLineMatches(buffer, line, end);
                 // System.out.println(line_builder);
