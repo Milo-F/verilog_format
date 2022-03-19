@@ -117,10 +117,10 @@ public class VerilogFormat extends ConsoleApplication {
         vFile.addStyle(new AlignBlockingAssignments());
         vFile.addStyle(new AlignNoBlockingAssignments());
         vFile.addStyle(new AlignLineComment());
-        vFile.addStyle(new NetDefineAlign());
         // vFile.addStyle(new ModuleInstantiation());
         // vFile.addStyle(new ModuleInstantiation());
         vFile.addStyle(new ModuleAlign());
+        vFile.addStyle(new NetDefineAlign());
         vFile.format();
         if (printFileFormated) {
             vFile.print();
