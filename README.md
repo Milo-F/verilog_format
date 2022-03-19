@@ -1,8 +1,5 @@
 # Verilog Format
 
-Console application for apply format to verilog file.
-
-![sample](images/verilog-format.gif)
 
 ## How to use
 
